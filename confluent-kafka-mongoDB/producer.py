@@ -3,7 +3,9 @@ from time import sleep
 from uuid import uuid4
 from confluent_kafka import SerializingProducer
 from confluent_kafka.schema_registry import SchemaRegistryClient
+from confluent_kafka.schema_registry.avro import AvroSerializer
 from confluent_kafka.serialization import StringSerializer
+from avro import schema, io
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 
@@ -13,7 +15,11 @@ import pickle
 import pandas as pd
 
 def recruitment_selection_test(err, msg):
-    pass
+    if err is not None:
+        print("Delivery failed for user record {}: {}".format(msg.key(), err))
+        return
+    print('User record {} successfully produced to {} [{}] at offset {}'.format(
+        msg.key(), msg.topic(), msg.partition(), msg.offset()))
 
 def fetch_and_produce_data(producer, data):
     for index, row in data.iterrows():
@@ -35,11 +41,12 @@ def fetch_and_produce_data(producer, data):
             topic='recruitment_selection_data', 
             key=str(row["CandidateID"]),
             value=recruitment_selection_data,
-            on_recruitment_selection = recruitment_selection_test
+            on_delivery = recruitment_selection_test
         )
+        print("Produced message:", logistic_data)
     
     # Define kafka configuration
-    kafka_config = {
+    kafka_config = { # Check in your confluent web
         "bootsrap.server": "",
         "security.protocol": "",
         "sasl.mechanisms": "",
@@ -48,10 +55,10 @@ def fetch_and_produce_data(producer, data):
     }
     
     # Create a schema registry client
-    # schema_registry_client = SchemaRegistryClient({
-    #     "url": "",
-    #     "basic.auth.user.info":'{}:{}'.format("schema-user", "schema-pass")
-    # })
+    schema_registry_client = SchemaRegistryClient({
+        "url": "",
+        "basic.auth.user.info":'{}:{}'.format("schema-user", "schema-pass")
+    })
     
     # Key_serializer
     key_serializer = StringSerializer('utf_8')
