@@ -1,6 +1,7 @@
 import threading
 from confluent_kafka import DeserializingConsumer
 from confluent_kafka.schema_registry import SchemaRegistryClient
+from confluent_kafka.schema_registry.avro import AvroDeserializer
 from confluent_kafka.serialization import StringDeserializer
 import os
 import json
@@ -8,8 +9,8 @@ from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 
 # Define Kafka configuration
-kafka_config = {
-    "bootstrap.servers":"pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092",
+kafka_config = { # check on your confluent web
+    "bootstrap.servers":"pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092", 
     "security.protocol":"SASL_SSL",
     "sasl.mechanisms":"PLAIN",
     "sasl.username":"kafka-user",
@@ -21,17 +22,19 @@ kafka_config = {
 
 # Create a Schema Registry client
 schema_registry_client = SchemaRegistryClient({
-    "url": "https://psrc-kjwmg.ap-southeast-2.aws.confluent.cloud",
+    "url": "",
     "basic.auth.user.info":'{}:{}'.format("schema-user","schema-pass")})
 
+
 # Fetch the latest Avro schema for the value
-subject_name = 'logistic_data-value'
+subject_name = 'recruitment_selection_data-value'
 schema_str = schema_registry_client.get_latest_version(subject_name).schema.schema_str
 
 
 # Create Avro Deserializer for the value
 # key_deserializer = Avrodeserializer(schema_registry_client=schema_registry_client, schema_str='{"type": "string"}')
 key_deserializer = StringDeserializer('utf_8')
+avro_deserializer = AvroDeserializer(schema_registry_client, schema_str)
 
 
 # Define the DeserializingConsumer
@@ -47,10 +50,10 @@ consumer = DeserializingConsumer({
 })
 
 # MongoDB configuration
-uri = ""
+uri = "" # check on your mongoDB web
 mongo_client = MongoClient(uri, server_api=ServerApi('1'))
-db = mongo_client['']
-collection = db['']
+db = mongo_client['recruitment_and_selection_db'] # Replace with your database name in mongoDB cluster
+collection = db['recruitment_selection_data'] # Replace with your collection name in mongoDB cluster
 
 # Subscribe to the 'recruitment_selection_data' topic
 consumer.subscribe(['recruitment_selection_data'])
