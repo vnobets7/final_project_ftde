@@ -1,0 +1,9 @@
+avroconsumer
+confluent-kafka
+fastavro
+requests
+six
+pandas
+dnspython
+pymongo
+python-dotenv
