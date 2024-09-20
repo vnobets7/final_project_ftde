@@ -1,8 +1,8 @@
-# MongoDB & Kafka Docker end to end example
+# ETL stream processing using Python, Kafka, Confluent Cloud, Mongo Atlas, Digitalocean, and Docker end to end example
 
-A simple example that takes .csv documents from the `pageviews` topic and stores them into the `test.
+A simple example that takes .csv documents from the `candidate` topic and stores them into the `recruitment-selection-cluster` mongoDB.
 
-The MongoDB Kafka Source Connector also publishes all change stream events from `test.pageviews` into the `mongo.test.pageviews` topic.
+The MongoDB - Kafka Source Connector also publishes all change stream events from `candidate` topic into the `recruitment-selection-cluster` mongoDB using python.
 
 ## Requirements
   - Python 3.10+
@@ -49,9 +49,6 @@ To run the example: `./run.sh` which will:
   - Run ML_Recruitment_Prediction.py and save  the data into postgreSQL
 
 **Note:** The script expects to be run from within the `docs` directory and requires the whole project to be checked out / downloaded. 
-
-
-Once running, examine the topics in the Kafka control center: http://localhost:9021/
 
 ## docker-compose.yml
 
