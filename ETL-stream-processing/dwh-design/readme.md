@@ -22,3 +22,7 @@ In this project, it will need to use 2 different database (local for experiment 
 ![Local-Database](https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-8.PNG)
 - Semi-cloud development PostegreSQL with digitalocean
 ![Semi-Cloud-Database](https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-8-1.PNG)
+
+## 5. Data Warehouse Design
+Current ERD of fact and dimensional table in HR data warehouse
+https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-7.PNG
