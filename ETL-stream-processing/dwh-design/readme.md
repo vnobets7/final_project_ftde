@@ -25,4 +25,4 @@ In this project, it will need to use 2 different database (local for experiment 
 
 ## 5. Data Warehouse Design
 Current ERD of fact and dimensional table in HR data warehouse
-https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-7.PNG
+![ERD-Database](https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-7.PNG)
