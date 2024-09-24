@@ -19,6 +19,6 @@ There 4 different type of data in this project:
 ## 4. Create table
 In this project, it will need to use 2 different database (local for experiment + semi-cloud digitalocean for prod dev)
 - Local development PostegreSQL with docker-compose
-![Local-Database](https://github.com/vnobets7/Digital-Skola-FTDE-Mini-Project4/blob/main/images/SS-project-8-flow-project-edit.PNG)
+![Local-Database](https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-8.PNG)
 - Semi-cloud development PostegreSQL with digitalocean
 ![Semi-Cloud-Database](https://github.com/vnobets7/final_project_ftde/blob/ftde-dev-ricky/ETL-stream-processing/images/SS-final-project-8-1.PNG)
